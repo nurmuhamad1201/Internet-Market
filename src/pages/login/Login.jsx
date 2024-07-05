@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+
 import { axiosRequest } from "../../utils/axiosRequest";
 import { saveToken } from "../../utils/token";
 
@@ -16,14 +16,14 @@ const Login = () => {
         userName: username,
         password: password,
       }
-    try {
-      const response = await axiosRequest.post("Account/login", user);
-      saveToken(user)
-      navigate("/")
-    } catch (err) {
-      setError("Invalid username or password");
-    }
-  };
+      try {
+        const {data} = await axiosRequest.post("Account/login", user);
+        saveToken(data.data);
+        navigate("/");
+      } catch (error) {
+       console.error(error);
+      }
+    };
  
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">

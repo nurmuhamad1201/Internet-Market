@@ -1,15 +1,45 @@
 
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import logo from '../../src/assets/svg/logo.svg'
 import like from '../../src/assets/svg/like.svg'
+import Switcher from "../components/Switcher";
+import burger from '../../src/assets/icons/icons8-burger-50.png'
+import CartIcon from "../components/shopingCartIcon";
+import IconWithModal from "../components/iconaccaunt";
+import Box from '@mui/material/Box';
 
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import { useState } from "react";
+import { Button } from "@mui/material";
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 const Layout = () => {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const navigate = useNavigate();
+
+  const handleNavigate = (path) => {
+    navigate(path);
+    handleClose();
+  };
   return (
-    <div>
-      <nav className="bg-white shadow-md">
+    <div className=" dark:bg-black " >
+      <nav className="bg-white sticky top-0 z-10 shadow-md">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="text-xl font-bold"><Link to='/'><img src={logo} alt="" /></Link></div>
-          <ul className="flex space-x-4">
+          <ul className="flex sm:hidden space-x-4">
             <li>
               <Link to="/" className="text-gray-700">Home</Link>
             </li>
@@ -23,20 +53,46 @@ const Layout = () => {
               <Link to="/login" className="text-gray-700">Sign in</Link>
             </li>
           </ul>
-          <div className=" flex  items-center">
-           
-          <img src={like} alt="" />
          
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-  <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-</svg>
-
+          <div className=" flex gap-5  items-center">
+           <Switcher />
+          <img src={like} alt="" />
+      <CartIcon />    
+      <IconWithModal />
+      <img onClick={handleOpen} className=" hidden sm:block " src={burger} alt="burger" />
           </div>
         </div>
       </nav>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        
+      >
+       <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Where do you want to go?
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            <Button onClick={() => handleNavigate("/")}>
+              Home
+            </Button>
+            <Button onClick={() => handleNavigate("/contact")}>
+              Contact
+            </Button>
+            <Button onClick={() => handleNavigate("/about")}>
+              About
+            </Button>
+            <Button onClick={() => handleNavigate("/login")}>
+              Sign in
+            </Button>
+          </Typography>
+        </Box>
+      </Modal>
       <Outlet />
 
-      <footer className="bg-[#000000] text-white py-8">
+      <footer className="bg-[#000000] mt-[200px] text-white py-8">
   <div className="container mx-auto flex justify-around flex-wrap gap-8">
     <ul className="flex gap-3 flex-col">
       <li>

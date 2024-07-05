@@ -22,7 +22,9 @@ import Cards from '../../components/cards';
 import Categories from '../../components/categories';
 import BestSellingProducts from '../../components/selling';
 import Kardochka from '../../components/kardochka';
-import ProductList from '../../components/cards';
+
+import ForProduct from '../../components/forProduct';
+import { Link } from 'react-router-dom';
 
 
 
@@ -58,9 +60,9 @@ const Home = () => {
  
     <main>
     
-    <section className="bg-gray-100 py-[50px] px-[50px] md:px-0 ">
+    <section className="bg-gray-100 py-[50px] dark:bg-zinc-900 dark:text-white px-[50px] md:px-0 ">
       <Container maxWidth="xl">
-        <div className="flex items-center gap-5 md:flex-wrap">
+        <div className="flex items-center  gap-5 md:flex-wrap">
 
            
           <div className='flex flex-col md:flex-row md:flex-wrap'>
@@ -152,7 +154,7 @@ const Home = () => {
   </div>
 </SwiperSlide>
 
-       
+{/* ForProduct */}
       
        
          
@@ -171,8 +173,18 @@ const Home = () => {
 
 <FlashSales />
 
-  <ProductList />
+<div>
+<ForProduct />
+<div className="flex justify-center">
+  <Link to="/see_All_Product">
+    <button className="bg-[#DB4444] text-white font-semibold py-2 px-4 rounded-lg hover:bg-white hover:text-[#DB4444] border border-[#DB4444] transition-colors duration-200">
+      View All Products
+    </button>
+  </Link>
+</div>
 
+
+</div>
  <Categories />
  <BestSellingProducts />
 
@@ -190,9 +202,9 @@ const Home = () => {
     <Cards products={Products2} />
 
 
-    <section className="container mx-auto py-8">
-  <div className="flex md:flex-row gap-4">
-  <div className="bg-black flex justify-center items-center p-4 rounded-lg shadow-md w-full md:w-2/5 mb-4">
+    <section className="container  mx-auto py-8">
+  <div className="flex md:flex-wrap gap-4">
+  <div className="bg-black flex justify-center items-center p-4 rounded-lg shadow-md w-full md:w-full mb-4">
   <div className="text-white text-center md:text-left">
     <img src={PlaySatation} alt="PlayStation 5" className=" w-[95%] object-cover mb-4 rounded-md" />
     <h1 className="text-2xl font-bold mb-2">PlayStation 5</h1>
@@ -200,31 +212,31 @@ const Home = () => {
   </div>
 </div>
 
-    <div className="flex flex-col md:flex-row gap-4 w-full">
-    <div className="bg-black text-white w-full md:w-2/5 p-4 rounded-lg shadow-md mb-4 flex items-center">
-  <div className="flex-1">
-    <h1 className="text-2xl font-bold mb-2  ">New Women's Fashion</h1>
-    <p className="text-gray-600">Check out our latest trends and styles.</p>
-  </div>
-  <img src={woman} alt="New Women's Fashion" className=" w-44 h-44 object-cover rounded-md" />
-</div>
+<div className="flex flex-col md:flex-wrap gap-4 w-full">
+      <div className="bg-black text-white w-full md:w-full p-4 rounded-lg shadow-md mb-4 flex items-center">
+        <div className="flex-1">
+          <h1 className="text-2xl font-bold mb-2">{"New Women's Fashion"}</h1>
+          <p className="text-gray-600">Check out our latest trends and styles.</p>
+        </div>
+        <img src={woman} alt="New Women's Fashion" className="w-44 h-44 object-cover rounded-md" />
+      </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-2 gap-4 w-full md:w-3/5">
-          <div className="bg-white p-4 rounded-lg shadow-md flex flex-col items-center hover:shadow-lg transition-shadow duration-200">
-            <img src={Speakers} alt="Speakers" className="w-full object-fill mb-4 rounded-md" />
-            <div className="text-white text-center">
-              <h1 className="text-xl font-bold mb-2">Speakers</h1>
-              <p className="text-gray-600">Experience the best sound in your earbuds.</p>
-            </div>
-          </div>
-          <div className="bg-white p-4 rounded-lg shadow-md flex flex-col items-center hover:shadow-lg transition-shadow duration-200">
-            <img src={Speakers} alt="Speakers" className="w-full object-fill mb-4 rounded-md" />
-            <div className="text-white text-center">
-              <h1 className="text-xl font-bold mb-2">Speakers</h1>
-              <p className="text-gray-600">Experience the best sound in your earbuds.</p>
-            </div>
+      <div className="grid grid-cols-2 sm:grid-cols-2 gap-4 w-full">
+        <div className="bg-white p-4  rounded-lg shadow-md flex flex-col items-center hover:shadow-lg transition-shadow duration-200">
+          <img src={Speakers} alt="Speakers" className="w-full object-fill mb-4 rounded-md" />
+          <div className="text-black text-center">
+            <h1 className="text-xl font-bold mb-2">Speakers</h1>
+            <p className="text-gray-600">Experience the best sound in your earbuds.</p>
           </div>
         </div>
+        <div className="bg-white p-4 rounded-lg shadow-md flex flex-col items-center hover:shadow-lg transition-shadow duration-200">
+          <img src={Speakers} alt="Speakers" className="w-full object-fill mb-4 rounded-md" />
+          <div className="text-black text-center">
+            <h1 className="text-xl font-bold mb-2">Speakers</h1>
+            <p className="text-gray-600">Experience the best sound in your earbuds.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>

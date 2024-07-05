@@ -35,11 +35,11 @@ const FlashSales = () => {
     }
 
     timerComponents.push(
-      <div key={interval} className="inline-block text-center mx-2">
-        <div className="text-2xl font-bold">
+      <div key={interval} className="inline-block  text-center mx-2">
+        <div className="text-2xl dark:text-white font-bold">
           {timeLeft[interval]}
         </div>
-        <div className="text-sm">
+        <div className="text-sm dark:text-white ">
           {interval}
         </div>
       </div>
@@ -50,7 +50,7 @@ const FlashSales = () => {
 
   return (
     <div className="container mx-auto py-8">
-      <div className="bg-white p-4 rounded-md shadow-md mb-6">
+      <div className="bg-white p-4 rounded-md dark:bg-zinc-900 shadow-md mb-6">
         <h2 className="text-2xl font-bold mb-4">Flash Sales</h2>
         <div className="text-lg mb-4">
           {timerComponents.length ? timerComponents : <span>{"Time's up!"}</span>}

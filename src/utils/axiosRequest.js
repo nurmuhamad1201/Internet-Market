@@ -1,18 +1,19 @@
-import axios from 'axios'
+import axios from 'axios';
 
 export const axiosRequest = axios.create({
- baseURL: import.meta.env.VITE_APP_API_URL,
-})
+  baseURL: import.meta.env.VITE_APP_API_URL,
+});
 
 axiosRequest.interceptors.request.use(
- config => {
-  const accessToken = localStorage.getItem('access_token')
-  if (accessToken) {
-   config.headers.Authorization = `Bearer ${accessToken}`
+  (config) => {
+    const accessToken = localStorage.getItem('access_token');
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
   }
-  return config
- },
- error => {
-  return Promise.reject(error)
- }
-)
+);
+    

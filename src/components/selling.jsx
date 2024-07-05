@@ -16,7 +16,7 @@ const BestSellingProducts = () => {
   return (
     <div className="my-8">
       <h2 className="text-2xl font-bold mb-4">Best Selling Products</h2>
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-4 md:grid-cols-2 xs:grid-cols-1 gap-4">
         {products.map((product) => (
           <div key={product.id} className="bg-white p-4 rounded-lg shadow-md relative group">
                <div className="relative group">

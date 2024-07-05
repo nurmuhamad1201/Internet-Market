@@ -52,7 +52,7 @@ export default function Switcher() {
           animationProperties={defaultProperties}
           checked={darkSide}
           onChange={toggleDarkMode}
-          size={56}
+          size={36}
         />
  
       </div>
