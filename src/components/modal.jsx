@@ -1,43 +1,78 @@
 import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import { getToken, destroyToken } from '../utils/token';
 
-const Modal = ({ onClose, onAccountClick, onLogoutClick }) => {
-  const [modalPosition, setModalPosition] = useState({ left: 0, top: 0 });
+const CustomModal = ({ onClose, onAccountClick }) => {
+  const userId = getToken()?.sid;
+  const isAuthorized = Boolean(userId);
+  const navigate = useNavigate();
 
-  const showModal = (event) => {
-    const svgIcon = event.target.getBoundingClientRect();
-    const modalLeft = svgIcon.left + 50;
-    const modalTop = svgIcon.top + 50;
-    setModalPosition({ left: modalLeft, top: modalTop });
+  const handleLogoutClick = () => {
+    destroyToken();
+    navigate('/');
+    onClose();
+    window.location.reload();
   };
 
   return (
-    <div
-      className="absolute flex flex-col right-[20px] items-center justify-center bg-black bg-opacity-50"
-      style={{ left: modalPosition.left, top: modalPosition.top }}
+    <Modal
+      open
+      onClose={onClose}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
     >
-      <div className="bg-white rounded-lg p-6 max-w-md">
-        <h2 className="text-lg font-semibold mb-4">Choose an action:</h2>
-        <button
-          className="bg-blue-500 w-[80%] m-auto hover:bg-blue-600 text-white py-2 px-4 rounded-lg mr-2"
-          onClick={onAccountClick}
+      <Box
+        sx={{
+          width: 400,
+          bgcolor: 'background.paper',
+          border: '2px solid #000',
+          boxShadow: 24,
+          p: 4,
+          borderRadius: 2,
+          textAlign: 'center',
+        }}
+        className="bg-white dark:bg-gray-800 dark:border-white"
+      >
+        <h2 className="text-lg font-semibold mb-4 dark:text-white">Choose an action:</h2>
+        <Link 
+          to={isAuthorized ? `/acaunt/${userId}` : '/login'} 
+          style={{ textDecoration: 'none' }}
         >
-          Account
-        </button>
-        <button
-          className="bg-blue-500 w-[80%] m-auto hover:bg-blue-600 text-white py-2 px-4 rounded-lg mr-2"
-          onClick={onLogoutClick}
+          <Button
+            variant="contained"
+            color="primary"
+            sx={{ width: '80%', m: 'auto', mb: 2 }}
+          >
+            Account
+          </Button>
+        </Link>
+        <Button
+          variant="contained"
+          color="primary"
+          sx={{ width: '80%', m: 'auto', mb: 2 }}
+          onClick={handleLogoutClick}
         >
           Log Out
-        </button>
-        <button
-          className="bg-red-500 hover:bg-red-600 w-[80%] m-auto text-white py-2 px-4 rounded-lg"
+        </Button>
+        <Button
+          variant="contained"
+          color="error"
+          sx={{ width: '80%', m: 'auto' }}
           onClick={onClose}
         >
           Close
-        </button>
-      </div>
-    </div>
+        </Button>
+      </Box>
+    </Modal>
   );
 };
 
-export default Modal;
+export default CustomModal;

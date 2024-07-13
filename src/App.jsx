@@ -12,9 +12,11 @@ import Cart from "./pages/cart/cart";
 import GetProductByid from "./pages/getProductById/getProductByid";
 import AllProduct from "./pages/allProduct/allProduct";
 import Acaunt from "./pages/accaunt/acaunt";
+ 
 
 
 const App = () => {
+ 
   const router = createBrowserRouter([
    
     {

@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import   { useState } from 'react';
 import ReactStars from 'react-stars';
 
+// eslint-disable-next-line react/prop-types
 const StarRating = ({ count, initialRating, onChange }) => {
   const [rating, setRating] = useState(initialRating);
 

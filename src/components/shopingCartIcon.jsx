@@ -1,28 +1,36 @@
 import { useNavigate } from 'react-router-dom';
 import { useGetCartProductsQuery } from '../services/api';
+import { getToken } from '../utils/token';
 
 const CartIcon = () => {
   const navigate = useNavigate();
-  const { data, error, isLoading } = useGetCartProductsQuery();
+  const { data, isLoading } = useGetCartProductsQuery();
 
   if (isLoading) return <span>Loading...</span>;
-//   if (error) return <span>Error loading cart data</span>;
 
   const totalProducts = data?.data[0]?.totalProducts || 0;
 
   const handleClick = () => {
-    navigate('/cart');
+    const isAuthorized = Boolean(getToken());
+    if (isAuthorized) {
+      navigate('/cart');
+    } else {
+      navigate('/login');
+    }
   };
 
   return (
-    <div onClick={handleClick} className="relative cursor-pointer">
+    <div
+      onClick={handleClick}
+      className="relative cursor-pointer text-gray-800 dark:text-white"
+    >
       <svg
         height="24"
         width="24"
         viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="h-6 w-6 text-gray-800 dark:text-white"
+        className="h-6 w-6"
       >
         <path
           d="M8.50033 19.6667C8.96056 19.6667 9.33366 19.2936 9.33366 18.8333C9.33366 18.3731 8.96056 18 8.50033 18C8.04009 18 7.66699 18.3731 7.66699 18.8333C7.66699 19.2936 8.04009 19.6667 8.50033 19.6667Z"
@@ -47,9 +55,9 @@ const CartIcon = () => {
         />
       </svg>
       {totalProducts > 0 && (
-        <span className="absolute top-0 left-0 bg-red-600 text-white rounded-full px-2 py-1 text-xs transform -translate-x-1/2 -translate-y-1/2">
+        <span className="absolute top-0 left-0 bg-red-600 dark:bg-red-400 text-white dark:text-black rounded-full px-2 py-1 text-xs transform -translate-x-1/2 -translate-y-1/2">
           {totalProducts}
-        </span> 
+        </span>
       )}
     </div>
   );

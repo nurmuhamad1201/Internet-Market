@@ -1,17 +1,27 @@
 import { useGetCartProductsQuery } from "../../services/api";
-import { useState } from 'react';
-import { axiosRequest } from "../../utils/axiosRequest";
-import icons8 from "../../assets/icons/icons8-x-50.png"
+import { useState, useEffect } from 'react';
+import icons8 from "../../assets/icons/icons8-x-50.png";
+import ClearCartButton from "../../components/clearCart";
+
 const Cart = () => {
-  const { data, error, isLoading , refetch } = useGetCartProductsQuery();
+  const { data, error, isLoading, refetch } = useGetCartProductsQuery();
   const [quantities, setQuantities] = useState({});
 
-  if (isLoading) return <p>Loading...</p>;
+  useEffect(() => {
+    const savedQuantities = localStorage.getItem('cartQuantities');
+    if (savedQuantities) {
+      setQuantities(JSON.parse(savedQuantities));
+    }
+  }, []);
 
+  useEffect(() => {
+    localStorage.setItem('cartQuantities', JSON.stringify(quantities));
+  }, [quantities]);
+
+  if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error loading cart: {error.message}</p>;
 
   const cart = data?.data?.[0];
-
   if (!cart) return <p>No cart data found.</p>;
 
   const handleQuantityChange = (productId, delta) => {
@@ -40,18 +50,17 @@ const Cart = () => {
     }, 0).toFixed(2);
   };
 
-
   const handleDeleteProduct = async (productId) => {
     try {
-      await axiosRequest({
-        url: `/Cart/delete-product-from-cart?id=${productId}`,
-        method: 'DELETE',
-      });
-     
+    
+      const newQuantities = { ...quantities };
+      delete newQuantities[productId];
+      setQuantities(newQuantities);
+
+      
       refetch();
     } catch (error) {
       console.error('Error deleting product:', error);
-     
     }
   };
 
@@ -69,6 +78,7 @@ const Cart = () => {
             <th className="py-2 px-4">Discount Price</th>
             <th className="py-2 px-4">Quantity</th>
             <th className="py-2 px-4">Total</th>
+            <th className="py-2 px-4">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -109,9 +119,9 @@ const Cart = () => {
               <td>
                 <button
                   onClick={() => handleDeleteProduct(item.product.id)}
-                  className=" text-white w-[30px] h-[30px]   py-1 rounded"
+                  className="text-white w-[30px] h-[30px] py-1 rounded"
                 >
-                  <img className="w-[30px] h-[30px]" src={icons8} alt="delete" /> 
+                  <img className="w-[30px] h-[30px]" src={icons8} alt="delete" />
                 </button>
               </td>
             </tr>
@@ -123,6 +133,7 @@ const Cart = () => {
         <p className="dark:text-white">Total Price: {getTotalPrice()}$</p>
         <p className="dark:text-white">Total Discount Price: {getTotalDiscountPrice()}$</p>
       </div>
+      <ClearCartButton />
     </div>
   );
 };

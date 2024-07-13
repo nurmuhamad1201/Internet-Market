@@ -36,7 +36,7 @@ const ForProduct = () => {
   return (
     <div className="flex dark:bg-neutral-950 py-7 px-3 rounded-2xl dark:text-white flex-wrap gap-4">
      {products.slice(0, 4).map((product) => (
-        <div key={product.id} className="bg-white p-4 dark:bg-[#161616] rounded-lg shadow-md relative w-[25%] sm:w-[48%] md:w-[32%] lg:w-[24%]">
+        <div key={product.id} className="bg-white p-4 dark:bg-[#161616] rounded-lg shadow-md relative w-[25%] sm:w-full md:w-[32%] lg:w-[24%]">
           <div className="relative group">
             <img src={`${imageApi}/${product.image}`} alt={product.productName} className="w-full h-40 object-contain rounded-md mb-4" />
             
@@ -55,7 +55,7 @@ const ForProduct = () => {
             count={5}
             value={product.rating || 0}
             size={24}
-            edit={false}
+            edit={true}
             activeColor="#ffd700"
             classNames="mb-2"
           />

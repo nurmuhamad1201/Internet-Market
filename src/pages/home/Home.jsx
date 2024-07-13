@@ -25,11 +25,17 @@ import Kardochka from '../../components/kardochka';
 
 import ForProduct from '../../components/forProduct';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import Aos from 'aos';
 
 
 
 const Home = () => {
-
+  useEffect(() => {
+    Aos.init({
+      duration: 1000,
+    });
+  })
   const initialProducts = [
     { id: 1, name: 'Gaming Controller', image: zhostik, description: 'High-quality gaming controller', price: '$49.99', rating: 4 },
     { id: 2, name: 'Mechanical Keyboard', image: kayboard, description: 'RGB Mechanical Keyboard', price: '$89.99', rating: 4 },
@@ -190,7 +196,7 @@ const Home = () => {
 
 
 
- <div className="my-8 p-8 flex justify-around items-center flex-wrap bg-black text-white rounded-lg">
+ <div data-aos="zoom-in-left" className="my-8 p-8 flex justify-around items-center flex-wrap bg-black text-white rounded-lg">
      <div>
      <h2 className="text-3xl font-bold mb-4">Enhance Your Music Experience</h2>
       <p>High-quality speakers with surround sound</p>
@@ -202,8 +208,9 @@ const Home = () => {
     <Cards products={Products2} />
 
 
-    <section className="container  mx-auto py-8">
-  <div className="flex md:flex-wrap gap-4">
+    <section  className="container  mx-auto py-8">
+  <div data-aos="fade-up"
+     data-aos-duration="3000" className="flex md:flex-wrap gap-4">
   <div className="bg-black flex justify-center items-center p-4 rounded-lg shadow-md w-full md:w-full mb-4">
   <div className="text-white text-center md:text-left">
     <img src={PlaySatation} alt="PlayStation 5" className=" w-[95%] object-cover mb-4 rounded-md" />
@@ -212,7 +219,9 @@ const Home = () => {
   </div>
 </div>
 
-<div className="flex flex-col md:flex-wrap gap-4 w-full">
+<div data-aos="fade-right"
+     data-aos-offset="300"
+     data-aos-easing="ease-in-sine" className="flex flex-col md:flex-wrap gap-4 w-full">
       <div className="bg-black text-white w-full md:w-full p-4 rounded-lg shadow-md mb-4 flex items-center">
         <div className="flex-1">
           <h1 className="text-2xl font-bold mb-2">{"New Women's Fashion"}</h1>

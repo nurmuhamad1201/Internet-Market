@@ -11,6 +11,7 @@ export default {
 			lg: { max: '1023px' },
 			ld: { max : "890px" },
 			md: { max: '767px' },
+			pg: { max: '550px' },
 			sm: { max: '639px' },
 			xs: { max: '400px' },
 		},

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { axiosRequest } from '../../utils/axiosRequest';
 import StarRating from '../../components/starRiting';
@@ -8,11 +8,11 @@ const GetProductById = () => {
   const { id } = useParams(); // Extracts the id parameter from the URL
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [quantity, setQuantity] = useState(1); // State for quantity
-  const [totalPrice, setTotalPrice] = useState(0); // State for total price
+  const [quantity, setQuantity] = useState(1); 
+  const [totalPrice, setTotalPrice] = useState(0);  
   const imageApi = 'http://65.108.148.136:8072/images';
   const navigate = useNavigate();
-  const [productRating, setProductRating] = useState(3); // Initial rating for the product
+  const [productRating, setProductRating] = useState(3);  
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -76,7 +76,7 @@ const GetProductById = () => {
     <div className="w-[80%] mx-auto px-4 py-8">
       <h2 className="text-2xl font-bold mb-4">{product.productName}</h2>
       <div className="flex  flex-row items-start justify-between mb-6">
-        {/* Product Image */}
+        
         <div className="flex w-full md:w-[50%] justify-center mb-6 md:mb-0">
           <img
             src={`${imageApi}/${product.images[0].images}`}
@@ -85,7 +85,7 @@ const GetProductById = () => {
           />
         </div>
         
-        {/* Product Details */}
+        
         <div className="md:ml-6 text-[30px] flex flex-col justify-center w-full md:w-[50%]">
           <p className="text-gray-700 dark:text-gray-300 mb-1">Brand: {product.brand}</p>
           <div className="mb-4">
@@ -95,8 +95,7 @@ const GetProductById = () => {
             Price: {product.hasDiscount ? product.discountPrice : product.price}$
           </p>
           <p className="text-[25px] font-mono font-[700] mb-4">{product.description}</p>
-
-          {/* Display Color with Color Box */}
+ 
           <div className="flex items-center mb-4">
             <p className="text-gray-700 dark:text-gray-300 mb-1">Colors:</p>
             <div
@@ -104,8 +103,7 @@ const GetProductById = () => {
               style={{ backgroundColor: product.color, border: '1px solid black' }}
             ></div>
           </div>
-
-          {/* Quantity Selection */}
+ 
           <div className="mb-4 flex items-center">
             <label htmlFor="quantity" className="text-gray-700 dark:text-gray-300 mr-2">
               Quantity:
@@ -136,7 +134,7 @@ const GetProductById = () => {
           {/* Total Price */}
           <p className="text-xl font-bold mb-4">Total Price: {totalPrice}$</p>
 
-          {/* Buy Now Button */}
+         
           <button
             onClick={() => handleAddToCart(product.id)}
             className="bg-[#DB4444] w-full md:w-auto m-auto text-white py-2 rounded hover:bg-white hover:text-black border hover:border-[#DB4444] transition-colors"
@@ -146,7 +144,7 @@ const GetProductById = () => {
         </div>
       </div>
 
-      {/* Dostavka Image */}
+      
       <div className="flex justify-center mt-4">
         <img src={dostavka} alt="Dostavka" className="w-32 md:w-24" />
       </div>

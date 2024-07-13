@@ -1,6 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { axiosRequest } from '../utils/axiosRequest';
- 
 
 const axiosBaseQuery =
   ({ baseUrl } = { baseUrl: '' }) =>
@@ -56,11 +55,32 @@ export const api = createApi({
         params: { id }, // Ensure id parameter is correctly passed
       }),
     }),
-    
     getBrands: builder.query({
       query: () => ({
         url: 'Brand/get-brands',
         method: 'GET',
+      }),
+    }),
+    getProfile: builder.query({
+      query: (id) => ({
+        url: `UserProfile/get-user-profile-by-id?id=${id}`,
+        method: 'GET',
+      }),
+    }),
+    updateProfile: builder.mutation({
+      query: ({ formData, accessToken }) => ({
+        url: 'UserProfile/update-user-profile',
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: formData
+      }),
+    }),
+    clearCart: builder.mutation({
+      query: () => ({
+        url: 'Cart/clear-cart',
+        method: 'DELETE',
       }),
     }),
   }),
@@ -71,5 +91,8 @@ export const {
   useGetCartProductsQuery,
   useGetCategoriesQuery,
   useGetCategoryByIdQuery,
-  useGetBrandsQuery, // Add this line to export useGetBrandsQuery
+  useGetBrandsQuery,
+  useGetProfileQuery,
+  useUpdateProfileMutation,
+  useClearCartMutation, 
 } = api;
