@@ -88,7 +88,7 @@ const Cart = () => {
               <td className="py-2 px-4">{item.product.productName}</td>
               <td className="py-2 px-4">
                 <img
-                  src={`http://65.108.148.136:8072/images/${item.product.image}`}
+                  src={`http://135.181.152.249:8072/images/${item.product.image}`}
                   alt={item.product.productName}
                   width="50"
                   className="rounded"

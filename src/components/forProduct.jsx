@@ -4,7 +4,7 @@ import { axiosRequest } from '../utils/axiosRequest';
 import { Link, useNavigate } from 'react-router-dom';
 import eye from '../assets/icons/icons8-eye-50.png';
 
-const imageApi = 'http://65.108.148.136:8072/images/';
+const imageApi = 'http://135.181.152.249:8072/images/';
 
 const ForProduct = () => {
   const { data, error, isLoading, refetch } = useGetProductsQuery();

@@ -10,7 +10,7 @@ const GetProductById = () => {
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1); 
   const [totalPrice, setTotalPrice] = useState(0);  
-  const imageApi = 'http://65.108.148.136:8072/images';
+  const imageApi = 'http://135.181.152.249:8072/images';
   const navigate = useNavigate();
   const [productRating, setProductRating] = useState(3);  
 
